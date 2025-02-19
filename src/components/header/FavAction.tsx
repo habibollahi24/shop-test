@@ -8,8 +8,11 @@ import Image from 'next/image';
 import { useEffect, useMemo, useState } from 'react';
 import { useAppSelector } from '@/store/hooks/hooks';
 
+import pic from '../../assets/nopic.jpg';
+
 export default function FavAction() {
   const [totalQuantity, setTotalQuantity] = useState(0);
+  const [imageError, setImageError] = useState(false);
 
   const favCartItems = useAppSelector(
     (state) => state.favCart.favCartItems
@@ -44,7 +47,9 @@ export default function FavAction() {
                   </div>
                   <div>
                     <Image
-                      src={fav.image}
+                      // src={fav.image}
+                      src={imageError ? pic : fav.image}
+                      onError={() => setImageError(true)}
                       alt={fav.title}
                       width={50}
                       height={50}

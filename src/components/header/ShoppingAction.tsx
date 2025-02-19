@@ -19,6 +19,8 @@ import {
   removeFromCart,
 } from '@/store/feature/cart-slice';
 
+import pic from '../../assets/nopic.jpg';
+
 export default function ShoppingAction() {
   const dispatch = useAppDispatch();
 
@@ -48,6 +50,8 @@ export default function ShoppingAction() {
   const handleRemoveFromCart = (id: number) => {
     dispatch(removeFromCart({ id }));
   };
+
+  const [imageError, setImageError] = useState(false);
 
   return (
     <div>
@@ -104,7 +108,9 @@ export default function ShoppingAction() {
                   </div>
                   <div>
                     <Image
-                      src={product.image}
+                      // src={product.image}
+                      src={imageError ? pic : product.image}
+                      onError={() => setImageError(true)}
                       width={80}
                       height={80}
                       alt={product.title}
